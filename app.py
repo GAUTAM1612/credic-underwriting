@@ -1,4 +1,4 @@
-import stremlist as st
+import stremlit as st
 import pandas as pd
 import pdfplumber
 import matplotlib.pyplot as plt
