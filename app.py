@@ -46,6 +46,22 @@ def extract_pdf_data(pdf_file):
                     except:
                         pass
     df = pd.DataFrame(data, columns=["Date", "Narration", "Debit", "Credit", "Balance"])
+    # Remove unwanted header rows
+df = df[df["Date"].notna()]
+df = df[df["Date"] != "Date"]
+
+# Remove commas and spaces
+for col in ["Debit", "Credit", "Balance"]:
+    df[col] = df[col].astype(str).str.replace(",", "", regex=False)
+    df[col] = df[col].str.replace(" ", "", regex=False)
+
+# Convert to numeric
+df["Debit"] = pd.to_numeric(df["Debit"], errors="coerce")
+df["Credit"] = pd.to_numeric(df["Credit"], errors="coerce")
+df["Balance"] = pd.to_numeric(df["Balance"], errors="coerce")
+
+# Fill NaN
+df = df.fillna(0
     df = df.dropna(subset=["Date"])
     return df
 
