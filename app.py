@@ -46,9 +46,10 @@ def extract_pdf_data(pdf_file):
                     except:
                         pass
     df = pd.DataFrame(data, columns=["Date", "Narration", "Debit", "Credit", "Balance"])
-    # Remove unwanted header rows
-df = df[df["Date"].notna()]
-df = df[df["Date"] != "Date"]
+df["Date"] = pd.to_datetime(df["Date"], errors="coerce")
+df = df.dropna(subset=["Date"])   
+# Remove unwanted header rows
+df = df.dropna(subset=["Date"])
 
 # Remove commas and spaces
 for col in ["Debit", "Credit", "Balance"]:
