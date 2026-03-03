@@ -1,17 +1,3 @@
-[3:48 pm, 3/3/2026] Gautam: df = pd.DataFrame(data, columns=["Date", "Narration", "Debit", "Credit", "Balance"])
-
-df["Date"] = pd.to_datetime(df["Date"], errors="coerce")
-df = df.dropna(subset=["Date"])
-
-# Convert to numeric
-df["Debit"] = pd.to_numeric(df["Debit"], errors="coerce")
-df["Credit"] = pd.to_numeric(df["Credit"], errors="coerce")
-df["Balance"] = pd.to_numeric(df["Balance"], errors="coerce")
-
-df = df.fillna(0)
-
-return df
-[9:50 pm, 3/3/2026] Gautam: import streamlit as st
 import pandas as pd
 import pdfplumber
 import matplotlib.pyplot as plt
